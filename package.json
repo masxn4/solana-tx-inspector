@@ -3,10 +3,24 @@
   "version": "0.1.0",
   "description": "CLI for turning Solana transaction data into a concise developer-friendly report.",
   "type": "module",
-  "bin": {"solana-tx-inspector": "./dist/cli.js"},
-  "scripts": {"build":"tsc -p tsconfig.json","start":"node dist/cli.js","test":"npm run build && node --test dist/**/*.test.js","check":"tsc -p tsconfig.json --noEmit"},
-  "engines":{"node":">=20"},
-  "dependencies":{"@solana/web3.js":"^1.98.4"},
-  "devDependencies":{"@types/node":"^22.10.0","typescript":"^5.7.2"},
-  "license":"MIT"
+  "bin": {
+    "solana-tx-inspector": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/cli.js",
+    "test": "npm run build && node --test dist/*.test.js",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  },
+  "license": "MIT"
 }
