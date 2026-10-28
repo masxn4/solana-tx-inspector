@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { inspectTransaction } from "./inspector.js";
+import { describeProgram } from "./programs.js";
 
 function usage(): never {
   console.error("Usage: solana-tx-inspector <signature> [--rpc <url>] [--json]");
@@ -34,7 +35,7 @@ try {
       for (const x of report.tokenBalanceChanges) console.log(`  account[${x.accountIndex}] ${x.mint}: ${x.before} -> ${x.after}`);
     }
     console.log("Programs:");
-    for (const id of report.programIds) console.log(`  - ${id}`);
+    for (const id of report.programIds) console.log(`  - ${describeProgram(id)}`);
     if (report.error) console.log(`Error:       ${JSON.stringify(report.error)}`);
     if (report.logMessages.length) {
       console.log("Logs:");
