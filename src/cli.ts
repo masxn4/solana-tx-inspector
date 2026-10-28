@@ -25,6 +25,14 @@ try {
     console.log(`Fee:         ${report.feeLamports} lamports`);
     console.log(`Compute:     ${report.computeUnits ?? "not reported"} CU`);
     console.log(`Accounts:    ${report.accountCount} (${report.signerCount} signer(s))`);
+    if (report.balanceChanges.length) {
+      console.log("SOL balance changes:");
+      for (const x of report.balanceChanges) console.log(`  account[${x.accountIndex}]: ${x.deltaLamports > 0 ? "+" : ""}${x.deltaLamports} lamports`);
+    }
+    if (report.tokenBalanceChanges.length) {
+      console.log("Token balance changes:");
+      for (const x of report.tokenBalanceChanges) console.log(`  account[${x.accountIndex}] ${x.mint}: ${x.before} -> ${x.after}`);
+    }
     console.log("Programs:");
     for (const id of report.programIds) console.log(`  - ${id}`);
     if (report.error) console.log(`Error:       ${JSON.stringify(report.error)}`);
