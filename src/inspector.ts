@@ -1,5 +1,6 @@
 import { Connection, VersionedTransactionResponse } from "@solana/web3.js";
 import { getBalanceChanges, getTokenBalanceChanges, type BalanceChange, type TokenBalanceChange } from "./analysis.js";
+import { parseInvocations, type Invocation } from "./logs.js";
 
 export type TxReport = {
   signature: string;
@@ -14,6 +15,7 @@ export type TxReport = {
   balanceChanges: BalanceChange[];
   tokenBalanceChanges: TokenBalanceChange[];
   logMessages: string[];
+  invocations: Invocation[];
   error: unknown | null;
 };
 
@@ -41,6 +43,7 @@ export function summarizeTransaction(signature: string, tx: VersionedTransaction
     balanceChanges: getBalanceChanges(tx),
     tokenBalanceChanges: getTokenBalanceChanges(tx),
     logMessages: tx.meta?.logMessages ?? [],
+    invocations: parseInvocations(tx.meta?.logMessages ?? []),
     error: tx.meta?.err ?? null
   };
 }
